@@ -1,0 +1,170 @@
+{% load static %}
+
+{% block content %}
+  <style>
+    /* Container Styling */
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 30px;
+        background-color: #ffffff;
+        border-radius: 20px;
+        box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
+        animation: fadeIn 0.5s ease; /* Added fade-in effect */
+    }
+
+    /* Fade-in Animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Card Styling */
+    .card {
+        border-radius: 20px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        padding: 30px;
+        transition: 0.3s;
+        margin-bottom: 30px;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Table Styling */
+    .table {
+        margin-top: 20px;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    .table th {
+        background-color: #28a745;
+        color: #fff;
+        font-weight: bold;
+        padding: 15px;
+        border-bottom: 2px solid #fff;
+        text-align: center;
+    }
+
+    .table td {
+        font-size: 1rem;
+        padding: 15px;
+        border-bottom: 1px solid #dee2e6;
+        text-align: center;
+        color: #333; /* Darker text for better readability */
+    }
+
+    /* Button Styling */
+    .btn-success {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: #fff;
+        padding: 12px 40px;
+        font-size: 1.1rem;
+        font-weight: 500;
+        transition: 0.3s;
+        border-radius: 50px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        margin: 20px auto 0; /* Center alignment */
+        display: block; /* Make button block element for centering */
+        text-transform: uppercase; /* Uppercase text for the button */
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Payment Section Styling */
+    .payment-header {
+        font-size: 3rem; /* Adjusted font size for better visual hierarchy */
+        font-weight: 700;
+        color: #28a745;
+        margin-bottom: 30px;
+        text-align: center;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Table Row Hover Effect */
+    .table tbody tr:hover {
+        background-color: rgba(40, 167, 69, 0.1);
+    }
+
+    /* Responsive Styling */
+    @media (max-width: 768px) {
+        .table th, .table td {
+            font-size: 0.9rem;
+        }
+        .btn-lg {
+            font-size: 1rem;
+            padding: 0.75rem 1.5rem;
+        }
+        .payment-header {
+            font-size: 2.5rem; /* Smaller font size on mobile */
+        }
+    }
+  </style>
+
+<div class="container mt-5">
+  <h2 class="payment-header text-center">Payment for Bill: {{ bill.bill_name }}</h2>
+  
+  <div class="card shadow-lg border-0 rounded-lg">
+      <div class="card-body">
+          <table class="table table-striped table-hover table-bordered">
+              <thead>
+                  <tr>
+                      <th class="table-success">Details</th>
+                      <th class="table-success">Information</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr>
+                      <th scope="row">Expense Name</th>
+                      <td>{{ bill.bill_name }}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row">Date & Time</th>
+                      <td>{{ bill.date }}</td>
+                  </tr>
+                  <tr>
+                      <th scope="row">Total Amount</th>                   
+                      <td>{{ expense.bill_id_id }}</td>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
+
+        <!-- eSewa Payment Form -->
+        <form action="https://uat.esewa.com.np/epay/main" method="POST">
+            <input value="100" name="tAmt" type="hidden">
+            <input value="90" name="amt" type="hidden">
+            <input value="0" name="txAmt" type="hidden">
+            <input value="0" name="psc" type="hidden">
+            <input value="0" name="pdc" type="hidden">
+            <input value="EPAYTEST" name="scd" type="hidden">
+            <input value="{{ bill.id }}" name="pid" type="hidden">
+            <input value="http://127.0.0.1:8000/verify-esewa?q={{request.user.id}}" type="hidden" name="su">
+            <input value="http://merchant.com.np/page/esewa_payment_failed?q=fu" type="hidden" name="fu">
+            <input class="btn" value="Pay with esewa" type="submit">
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script src="{% static 'js/payment.js' %}"></script>
+{% endblock %}

@@ -26,6 +26,9 @@ from django.utils.encoding import force_bytes, force_str
 from django.contrib.sites.shortcuts import get_current_site 
 from .token import account_activation_token
 
+from django.shortcuts import render, get_object_or_404
+# from .models import Model
+
 
 # Helper funtions
 def get_paid_debts(current_paid_amount, must_pay):
@@ -641,6 +644,68 @@ def settle_payment(request):
 
     json_data = json.dumps(data)
     return json_data
+
+
+from django.views import View
+from django.http import HttpResponseRedirect, Http404
+from django.urls import reverse
+import requests  # Make sure to import requests module
+
+class VerifyEsewa(View):
+    def get(self, request):
+        url = "https://uat.esewa.com.np/epay/transrec"
+        q = request.GET.get('q')
+        print("Request GET Parameters:", request.GET)  # Improved logging
+
+        # Prepare the data to send to eSewa for verification
+        data = {
+            'amt': request.GET.get('amt'),
+            'scd': 'EPAYTEST',  # Replace with your actual merchant code
+            'rid': request.GET.get('refId'),
+            'pid': request.GET.get('oid'),
+        }
+
+        # Send a POST request to eSewa for transaction verification
+        try:
+            response = requests.post(url, data=data)  # Use 'data' instead of 'd'
+            print("Response Status Code:", response.status_code)  # Improved logging
+        except requests.RequestException as e:
+            print("Request to eSewa failed:", e)
+            raise Http404("Unable to verify transaction.")
+
+        # Check the response status
+        # if response.status_code == 200:
+        #     user = self.request.user
+        #     user.has_verified_dairy = True  # Set your actual field here
+        #     user.save()
+
+            # Redirect to the desired page after verification
+            return HttpResponseRedirect(reverse('payment_page'))  # Use the correct URL name
+        else:
+            print("Verification failed:", response.text)
+            raise Http404("Transaction verification failed.")
+        
+
+def payment_success(request):
+    # You can add any logic here if needed
+    return render(request, 'home/payment_success.html')
+
+def payment_failure(request):
+    # You can add any logic here if needed
+    return render(request, 'home/payment_failure.html')
+
+from django.shortcuts import render, get_object_or_404
+from .models import Bill
+
+def payment_page(request, bill_id):
+    # Use bill_id to look up the expense/bill details
+    bill = get_object_or_404(Bill, id=bill_id)
+
+    # Handle payment logic here (e.g., show payment form, redirect to payment gateway)
+    context = {
+        'bill': bill
+    }
+    return render(request, 'payment_page.html', context)
 
 
 # Main views

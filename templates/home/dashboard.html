@@ -204,80 +204,83 @@
                             <div class="unsettled_expenses_wrapper">
                                 <div class="sms-send-page">
                                     <ul class="list-group">
-                                        <!-- <li class="list-group-item d-flex align-items-center">
+                                        <li class="list-group-item d-flex align-items-center">
                                             
-                                        </li> -->
+                                        </li>
                                         {% if unsettled_expenses %}
-                                            {% for expense in unsettled_expenses %}
-                                                    
-                                                    <li data-aos="fade-up" data-aos-duration="1000" class="list-group-item d-flex align-items-center"
-                                                        id='{{ expense.bill_id_id }}'>
-                                                        <div class="col-xs-8 pull-left me-auto">
-                                                            <p><strong>{{ expense.bill_id__bill_name }} - {{ expense.group_id__group_name }}</strong></p>
-                                                        </div>
-                                                        <div class="col-xs-4 pull-right">
-                                                            <button class="btn primary-btn text-light" type="button" data-bs-toggle="collapse"
-                                                                data-bs-target="#billDetail_{{ expense.bill_id_id }}"
-                                                                aria-expanded="false" aria-controls="collapseExample">
-                                                                Bill Details<i class="fa-solid fa-arrow-down-short-wide"></i>
-                                                            </button>
-                                                        </div>
-                                                    </li>
-                                                    <div class="collapse" id="billDetail_{{ expense.bill_id_id }}">
-                                                        <div class="card card-body">
-                                                            <table class="table table-hover table-striped">
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <th class="table-dark" scope="col">Expense Name</th>
-                                                                        <th class="table-dark" scope="col">{{ expense.bill_id__bill_name }}</th>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td scope="col">Date & Time</td>
-                                                                        <td scope="col">{{ expense.bill_id__date }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td scope="col">Split Type</td>
-                                                                        <td scope="col">{{ expense.bill_id__split_type }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td scope="col">Amount Paid by You</td>
-                                                                        <td scope="col">&#8360; {{ expense.paid }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td scope="col">Amount on your Part</td>
-                                                                        <td scope="col">&#8360; {{ expense.must_pay }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td scope="col">Debt amount</td>
-                                                                        <td scope="col">&#8360; {{ expense.debt }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td scope="col">Lent amount</td>
-                                                                        <td scope="col">&#8360;{{ expense.lent }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="fw-bold" scope="col">Total Amount</td>
-                                                                        <td class="fw-bold" scope="col">&#8360; {{ expense.bill_id__amount }}</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                    </div>
-                                            {% endfor %}
-                                        {% else %}
-                                            <li class="list-group-item d-flex align-items-center">
-                                                <div class="col-xs-8 pull-left me-auto">
-                                                    <p><strong>Your all settled up.</strong></p>
+                                        {% for expense in unsettled_expenses %}
+                                            <li data-aos="fade-up" data-aos-duration="1000" class="list-group-item d-flex align-items-center" id="{{ expense.bill_id_id }}">
+                                                <div class="col-xs-8 me-auto">
+                                                    <p><strong>{{ expense.bill_id__bill_name }} - {{ expense.group_id__group_name }}</strong></p>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <button class="btn primary-btn text-light" type="button" data-bs-toggle="collapse"
+                                                            data-bs-target="#billDetail_{{ expense.bill_id_id }}" aria-expanded="false"
+                                                            aria-controls="collapseExample">
+                                                        Bill Details <i class="fa-solid fa-arrow-down-short-wide"></i>
+                                                    </button>
                                                 </div>
                                             </li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                            <div class="collapse" id="billDetail_{{ expense.bill_id_id }}">
+                                                <div class="card card-body">
+                                                    <table class="table table-hover table-striped">
+                                                        <tbody>
+                                                            <tr>
+                                                                <th class="table-dark">Expense Name</th>
+                                                                <td class="table-dark">{{ expense.bill_id__bill_name }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Date & Time</td>
+                                                                <td>{{ expense.bill_id__date }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Split Type</td>
+                                                                <td>{{ expense.bill_id__split_type }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="fw-bold">Total Amount</td>
+                                                                <td class="fw-bold">&#8360; {{ expense.bill_id__amount }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Amount Paid by You</td>
+                                                                <td>&#8360; {{ expense.paid }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Amount on Your Part</td>
+                                                                <td>&#8360; {{ expense.must_pay }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Debt Amount</td>
+                                                                <td>&#8360; {{ expense.debt }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Lent Amount</td>
+                                                                <td>&#8360; {{ expense.lent }}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    {% if expense.debt > 0 %}
+                                                        <a href="{% url 'payment_page' expense.bill_id_id %}" class="btn btn-primary btn-lg">
+                                                            Pay Debt Amount of &#8360; {{ expense.debt }}
+                                                        </a>
+                                                    {% elif expense.lent > 0 %}
+                                                        <a href="{% url 'payment_page' expense.bill_id_id %}" class="btn btn-primary btn-lg">
+                                                            Pay Lent Amount of &#8360; {{ expense.lent }}
+                                                        </a>
+                                                    {% else %}
+                                                        <p class="text-success">No payment needed.</p>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        <li class="list-group-item d-flex align-items-center">
+                                            <div class="col-xs-8 me-auto">
+                                                <p><strong>You're all settled up.</strong></p>
+                                            </div>
+                                        </li>
+                                    {% endif %}
+                                                                 
             <div class="row">
                 <div class="col">
                     <div class="activity_wrapper">

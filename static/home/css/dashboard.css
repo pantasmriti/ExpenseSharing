@@ -1,219 +1,156 @@
+/* Refined Sidebar */
 .side_bar_row {
-    font-size: 19px;
-    color: #999;
-    padding: 5px 10px;
-    -webkit-touch-callout: none;
-    /* iOS Safari */
-    -webkit-user-select: none;
-    /* Safari */
-    -khtml-user-select: none;
-    /* Konqueror HTML */
-    -moz-user-select: none;
-    /* Old versions of Firefox */
-    -ms-user-select: none;
-    /* Internet Explorer/Edge */
-    user-select: none;
+    font-size: 18px;
+    color: #4a4a4a; /* Darker base color */
+    padding: 12px 16px; /* Increased padding for better spacing */
+    transition: color 0.3s ease, background-color 0.3s ease;
+    border-radius: 4px; /* Rounded corners for a softer look */
 }
 
 .side_bar_row:hover {
-    color: rgb(99, 99, 99);
+    color: #fff; /* White text on hover for contrast */
+    background-color: #28a745; /* Green background on hover */
     cursor: pointer;
 }
 
 .side_bar_row_clicked {
-    border-left: 5px solid blue;
-    color: blue;
+    border-left: 5px solid #28a745; /* Green left border */
+    color: #fff; /* White text */
+    background-color: #28a745; /* Consistent green background */
 }
 
 .side_bar_label {
-    background-color: rgb(231, 231, 231);
-    color: rgb(116, 116, 116);
+    background-color: #f9f9f9;
+    color: #555; /* Slightly darker label color */
     font-size: 16px;
     margin-top: 10px;
+    padding: 8px;
+    border-radius: 4px; /* Rounded corners */
 }
 
 .side_bar_label:hover {
     cursor: default;
-    border: 0;
-    color: rgb(99, 99, 99);
+    color: #333; /* Darker color on hover for readability */
 }
 
+/* Add icon hover state */
 .add_icon_wrapper {
-    font-size: 17px;
+    font-size: 18px;
+    color: #28a745; /* Green color */
+    transition: color 0.3s ease;
 }
 
 .add_icon_wrapper:hover {
-    border: 0;
-    color: rgb(99, 99, 99);
+    color: #218838; /* Darker green on hover */
 }
 
-.group_name_list,
-.friend_name_list {
-    font-size: 15px;
+/* Group and Friend List Styling */
+.group_name_list, .friend_name_list {
+    font-size: 16px;
+    color: #4a4a4a;
 }
 
-.group_name_list_wrapper,
-.friends_name_list_wrapper {
-    max-height: 100px;
+.group_name_list_wrapper, .friends_name_list_wrapper {
+    max-height: 150px;
     overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 8px;
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px; /* Subtle shadow for depth */
 }
 
-.dashboard_wrapper,
-.activity_wrapper,
-.all_expense_wrapper,
-.data_box_wrapper {
-    height: 700px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+/* Dashboard & Expense Box Styling */
+.dashboard_wrapper, .activity_wrapper, .all_expense_wrapper, .data_box_wrapper {
+    height: auto;
+    padding: 20px; /* Increased padding for content */
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 20px; /* Enhanced shadow for depth */
 }
 
-.dashboard_header,
-.activity_header,
-.all_expense_header,
-.data_box_header {
-    background-color: #e7e7e7;
+.dashboard_header, .activity_header, .all_expense_header, .data_box_header {
+    background-color: #e9ecef; /* Light gray header */
+    padding: 12px;
+    border-bottom: 2px solid #dee2e6; /* Softer border color */
+    border-radius: 8px 8px 0 0; /* Rounded top corners */
 }
 
-.dashboard_header .heading,
-.activity_header .heading,
-.all_expense_wrapper .heading,
-.data_box_wrapper .heading {
-    font-size: 30px;
-    padding: 10px 15px;
-    font-weight: 500;
-    color: #404040;
-}
-
-.dashboard_header .dashboard_header_btns,
-.all_expense_header .all_expense_header_btns {
-    margin-bottom: 0;
-    margin-right: 15px;
-}
-
-
-
-.dashboard_body,
-.activity_body,
-.all_expense_body,
-.data_box_body {
-    height: 90%;
-    overflow: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #6969dd #e0e0e0;
-    padding: 10px 15px;
-}
-
-.dashboard_body::-webkit-scrollbar,
-.activity_body::-webkit-scrollbar,
-.all_expense_body::-webkit-scrollbar,
-.data_box_body::-webkit-scrollbar {
-    width: 1em;
-}
-
-.dashboard_body::-webkit-scrollbar-track,
-.activity_body::-webkit-scrollbar-track,
-.all_expense_body::-webkit-scrollbar-track,
-.data_box_body::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-}
-
-.dashboard_body::-webkit-scrollbar-thumb,
-.activity_body::-webkit-scrollbar-thumb,
-.all_expense_body::-webkit-scrollbar-thumb,
-.data_box_body::-webkit-scrollbar-thumb {
-    background-color: darkgrey;
-    border-radius: 10px;
-}
-
-
-
-
-.sms-send-page .pull-left p,
-.sms-send-page .pull-left h5 {
-    color: #5b6773;
+.dashboard_header .heading, .activity_header .heading, .all_expense_wrapper .heading, .data_box_wrapper .heading {
+    font-size: 28px;
+    color: #333;
     margin: 0;
 }
 
-.sms-send-page .list-group-item {
+/* Scrollbars */
+.dashboard_body, .activity_body, .all_expense_body, .data_box_body {
+    max-height: 80vh;
+    overflow: auto;
     padding: 10px;
-    border: 1px solid #e6e8eb;
-    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: #28a745 #e0e0e0; /* Changed scrollbar color */
 }
 
-.sms-send-page .list-group {
-    box-shadow: 0 0 11px #eceeef;
-    /* max-height: 250px; */
-    /* overflow: auto; */
-    margin-bottom: 10px;
+.dashboard_body::-webkit-scrollbar, .activity_body::-webkit-scrollbar, .all_expense_body::-webkit-scrollbar, .data_box_body::-webkit-scrollbar {
+    width: 10px;
 }
 
-.sms-send-page .list-group-item:first-child {
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
+.dashboard_body::-webkit-scrollbar-thumb, .activity_body::-webkit-scrollbar-thumb, .all_expense_body::-webkit-scrollbar-thumb, .data_box_body::-webkit-scrollbar-thumb {
+    background-color: #6c757d; /* Gray thumb color */
+    border-radius: 10px;
 }
 
-.sms-send-page .list-group-item:last-child {
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
-    margin-bottom: 0;
+/* SMS Page Styling */
+.sms-send-page .pull-left p, .sms-send-page .pull-left h5 {
+    color: #4a5568; /* Soft text color */
+    margin: 0;
+    font-size: 14px;
 }
 
-.sms-send-page .pull-right i {
-    /* font-size: 9px; */
-    /* vertical-align: middle; */
-    margin-left: 10px;
+.sms-send-page .list-group-item {
+    padding: 12px;
+    border: 1px solid #ddd;
+    background-color: #fff;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.sms-send-page .list-group-item:hover {
+    background-color: #f9f9f9; /* Subtle hover effect */
 }
 
 .activity_body .sms-send-page .list-group li:first-child {
-    background-color: #e7e7e7;
+    background-color: #f5f5f5;
 }
 
-
-#invite_error,
-#friend_request_error,
-#group_request_error,
-#group_expense_request_error,
-#friend_expense_request_error {
-    display: none;
-}
-
+/* Modals & Error Messages */
 .hide-modal {
     display: none;
 }
 
-.group_modal,
-.friend_modal {
-    margin-top: 10px;
+.group_modal, .friend_modal {
+    margin-top: 15px;
 }
 
 .alert-dismissible {
-    margin: 10px 10px 10px 0;
-    float: left;
+    margin: 10px 0;
+    padding: 10px; /* Increased padding for alerts */
+    background-color: #e2f0e5; /* Light green for alerts */
+    color: #155724; /* Dark green for text */
+    border-radius: 4px;
+    border: 1px solid #c3e6cb; /* Soft green border */
 }
 
-.validation_error {
-    color: red;
+/* Error Validation */
+.validation_error, .invalid_value_error {
+    color: #dc3545; /* Red for error messages */
+    font-size: 14px;
     display: none;
 }
 
-#add_group_response,
-#add_friend_expense_response,
-#add_group_expense_response {
-    display: none;
-    margin-top: 10px;
-}
-
-
-.invalid_value_error {
-    display: none;
-    color: red;
-}
-
-#add_friend_modal .modal-body {
-    max-height: 400px;
-    overflow-y: auto;
-}
-
+/* Notification Dropdown */
 #notification .dropdown-menu {
-    min-width: 18rem;
+    min-width: 20rem;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 8px; /* Added shadow for dropdown */
 }
